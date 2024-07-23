@@ -6,7 +6,7 @@ namespace VersionedEndpoints.AspNetCore.Endpoints;
 public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddEndpointsFromAssemblies(this IServiceCollection services, IEnumerable<Assembly> assemblies,
-        ServiceLifetime lifetime = ServiceLifetime.Scoped)
+        ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         foreach (var assembly in assemblies)
         {
