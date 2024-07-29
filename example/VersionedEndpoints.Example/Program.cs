@@ -1,5 +1,3 @@
-using Asp.Versioning;
-
 var builder = WebApplication.CreateBuilder(args);
 
 var config = builder.Configuration;
