@@ -10,6 +10,8 @@ internal static class ApiEndpoints
 
         internal static OpenApiTag Tag => new() { Name = "Game" };
 
+        internal const string ListGames = RootCollection;
+
         internal static class V1
         {
             internal const int Version = 1;

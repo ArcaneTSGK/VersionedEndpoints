@@ -4,9 +4,18 @@ using Swashbuckle.AspNetCore.SwaggerUI;
 
 namespace VersionedEndpoints.AspNetCore.Swagger;
 
-public static class RequestPipelineExtensions
+/// <summary>
+/// Adds swagger support.
+/// </summary>
+internal static class RequestPipelineExtensions
 {
-    public static WebApplication UseSwaggerDocument(
+    /// <summary>
+    /// By default maps a document per api version.
+    /// </summary>
+    /// <param name="app"></param>
+    /// <param name="options"></param>
+    /// <param name="uiOptions"></param>
+    internal static WebApplication UseSwaggerDocument(
         this WebApplication app,
         Action<SwaggerOptions>? options = null,
         Action<SwaggerUIOptions>? uiOptions = null)

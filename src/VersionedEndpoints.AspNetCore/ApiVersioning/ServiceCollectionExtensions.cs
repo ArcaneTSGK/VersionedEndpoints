@@ -4,9 +4,17 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace VersionedEndpoints.AspNetCore.ApiVersioning;
 
-public static class ServiceCollectionExtensions
+/// <summary>
+/// Extension methods that provide the ability to configure API versioning.
+/// </summary>
+internal static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddApiVersioningConfiguration(this IServiceCollection services,
+    /// <summary>
+    /// Sets up API versioning, by default will use UrlSegmentApiVersionReader, override by passing your own ApiVersioningOptions.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="apiVersioningOptions"></param>
+    internal static IServiceCollection AddApiVersioningConfiguration(this IServiceCollection services,
         Action<ApiVersioningOptions>? apiVersioningOptions = null)
     {
         IApiVersionReader apiVersionReader = new UrlSegmentApiVersionReader();

@@ -9,9 +9,16 @@ namespace VersionedEndpoints.AspNetCore.Swagger;
 /// <summary>
 /// Common extension methods for swagger support.
 /// </summary>
-public static class ServiceCollectionExtensions
+internal static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddSwaggerDocument(
+    /// <summary>
+    /// Add swagger support.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="config"></param>
+    /// <param name="documentOptions"></param>
+    /// <param name="swaggerGenOptions"></param>
+    internal static IServiceCollection AddSwaggerDocument(
         this IServiceCollection services,
         ConfigurationManager config,
         Action<DocumentOptions>? documentOptions = null,
@@ -85,7 +92,7 @@ public static class ServiceCollectionExtensions
                     });
                 }
             });
-        
+
         return services;
     }
 }

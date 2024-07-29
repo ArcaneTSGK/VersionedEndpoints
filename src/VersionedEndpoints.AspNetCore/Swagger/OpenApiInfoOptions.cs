@@ -1,5 +1,8 @@
 ﻿namespace VersionedEndpoints.AspNetCore.Swagger;
 
+/// <summary>
+/// Information about the OpenAPI document which can be provided by configuration.
+/// </summary>
 public class OpenApiInfoOptions
 {
     public string Title { get; init; } = default!;

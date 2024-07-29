@@ -3,9 +3,15 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace VersionedEndpoints.AspNetCore.Endpoints;
 
-public static class ServiceCollectionExtensions
+internal static class ServiceCollectionExtensions
 {
-    public static IServiceCollection AddEndpointsFromAssemblies(this IServiceCollection services, IEnumerable<Assembly> assemblies,
+    /// <summary>
+    /// For each assembly, adds all endpoints that implement IEndpoint to the service collection.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="assemblies"></param>
+    /// <param name="lifetime"></param>
+    internal static IServiceCollection AddEndpointsFromAssemblies(this IServiceCollection services, IEnumerable<Assembly> assemblies,
         ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         foreach (var assembly in assemblies)
@@ -16,7 +22,13 @@ public static class ServiceCollectionExtensions
         return services;
     }
 
-    public static IServiceCollection AddEndpointsFromAssembly(this IServiceCollection services, Assembly assembly,
+    /// <summary>
+    /// For a given assembly, adds all endpoints that implement IEndpoint to the service collection.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="assembly"></param>
+    /// <param name="lifetime"></param>
+    internal static IServiceCollection AddEndpointsFromAssembly(this IServiceCollection services, Assembly assembly,
         ServiceLifetime lifetime = ServiceLifetime.Singleton)
     {
         var endpoints = assembly

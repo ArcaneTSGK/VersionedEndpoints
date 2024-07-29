@@ -1,13 +1,19 @@
-﻿using Asp.Versioning.Builder;
+﻿using Asp.Versioning;
+using Asp.Versioning.Builder;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace VersionedEndpoints.AspNetCore.Endpoints;
 
-public static class RequestPipelineExtensions
+internal static class RequestPipelineExtensions
 {
-    public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder endpointRouteBuilder, bool substituteApiVersionInUrl)
+    /// <summary>
+    /// Maps inheritors of IEndpoint assigning them to their respective groups and versions.
+    /// </summary>
+    /// <param name="endpointRouteBuilder"></param>
+    /// <param name="substituteApiVersionInUrl"></param>
+    internal static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder endpointRouteBuilder, bool substituteApiVersionInUrl)
     {
         var endpoints = endpointRouteBuilder
             .ServiceProvider
@@ -29,7 +35,7 @@ public static class RequestPipelineExtensions
 
             var routeGroupBuilder = routes
                 .GetOrAdd(compositeRouteKey, () => versionedApi
-                    .MapGroup(substituteApiVersionInUrl ? "api/v{version:apiVersion}" : "api")
+                    .MapGroup(substituteApiVersionInUrl && version != ApiVersion.Neutral ? "api/v{version:apiVersion}" : "api")
                     .HasApiVersion(version));
 
             endpoint.AddEndpoint(routeGroupBuilder);
@@ -38,6 +44,14 @@ public static class RequestPipelineExtensions
         return endpointRouteBuilder;
     }
 
+    /// <summary>
+    /// Gets the value associated with the specified key or adds a new value if the key does not exist.
+    /// </summary>
+    /// <param name="dictionary"></param>
+    /// <param name="key"></param>
+    /// <param name="valueFactory"></param>
+    /// <typeparam name="TKey"></typeparam>
+    /// <typeparam name="TValue"></typeparam>
     private static TValue GetOrAdd<TKey, TValue>(
         this IDictionary<TKey, TValue> dictionary,
         TKey key, Func<TValue> valueFactory)

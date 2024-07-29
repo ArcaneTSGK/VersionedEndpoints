@@ -9,8 +9,20 @@ using VersionedEndpoints.AspNetCore.Swagger;
 // ReSharper disable once CheckNamespace
 namespace Microsoft.Extensions.DependencyInjection;
 
+/// <summary>
+/// Extension methods that provide the ability to configure API versioning and add endpoints.
+/// </summary>
 public static class ServiceCollectionExtensions
 {
+    /// <summary>
+    /// By default, adds all endpoints inherited from IEndpoint in the calling assembly with swagger support.
+    /// </summary>
+    /// <param name="services"></param>
+    /// <param name="config"></param>
+    /// <param name="assemblies"></param>
+    /// <param name="apiVersioningOptions"></param>
+    /// <param name="documentOptions"></param>
+    /// <param name="swaggerGenOptions"></param>
     public static IServiceCollection AddVersionedEndpoints(
         this IServiceCollection services,
         ConfigurationManager config,

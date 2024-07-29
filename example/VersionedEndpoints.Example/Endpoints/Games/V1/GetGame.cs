@@ -22,6 +22,7 @@ public class GetGame : IEndpoint
         })
         .WithName(nameof(GetGame) + ApiVersion)
         .MapToApiVersion(ApiVersion)
+        .HasDeprecatedApiVersion(1)
         .WithOpenApi(GetGameOperation);
     }
 
@@ -30,6 +31,8 @@ public class GetGame : IEndpoint
         operation.Description = "Get a game by its unique identifier.";
         operation.Summary = "Get a game";
         operation.Tags = new List<OpenApiTag> { ApiEndpoints.Games.Tag };
+
+        operation.Deprecated = true;
 
         return operation;
     }
