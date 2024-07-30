@@ -22,7 +22,7 @@ jobs:
     runs-on: windows-2022
     env:
       CREATE_RELEASE: ${{ github.ref_name == 'main' && !contains(github.event.head_commit.message, 'dependabot[bot]') }}
-      CREATE_PRERELEASE: ${{ github.ref_name != 'main') }}
+      CREATE_PRERELEASE: ${{ github.ref_name != 'main' }}
     steps:
       - name: checkout
         uses: actions/checkout@v4.1.7
