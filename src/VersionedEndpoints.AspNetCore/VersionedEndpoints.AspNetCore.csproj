@@ -6,6 +6,7 @@
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
     <ImplicitUsings>enable</ImplicitUsings>
     <IncludeSymbols>true</IncludeSymbols>
+    <EmbedAllSources>true</EmbedAllSources>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
     <Nullable>enable</Nullable>
   </PropertyGroup>
