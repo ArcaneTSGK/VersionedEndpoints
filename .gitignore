@@ -485,3 +485,6 @@ $RECYCLE.BIN/
 
 # Rider
 .idea/
+
+# Cake
+tools/
