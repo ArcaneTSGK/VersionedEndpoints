@@ -41,10 +41,5 @@ jobs:
         with:
           name: package
           path: .\artifacts\packages
-      - uses: NuGet/setup-nuget@v2.0.0
-        name: Push NuGet package
-        with:
-          nuget-api-key: ${{ secrets.NUGET_ACTIONS }}
-          nuget-api-key-source: https://api.nuget.org/v3/index.json
-      - run: nuget push .\artifacts\packages -SkipDuplicate -NonInteractive
-        
+      - name: Push NuGet package
+        run: dotnet nuget push .\artifacts\packages\ -s https://api.nuget.org/v3/index.json -k ${{ secrets.NUGET_ACTIONS }} -ss https://api.nuget.org/v3/index.json -sk ${{ secrets.NUGET_ACTIONS }} --skip-duplicate
