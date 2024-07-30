@@ -20,9 +20,6 @@ jobs:
   build:
     name: Build
     runs-on: windows-2022
-    env:
-      CREATE_RELEASE: ${{ github.ref_name == 'main' && !contains(github.event.head_commit.message, 'dependabot[bot]') }}
-      CREATE_PRERELEASE: ${{ github.ref_name != 'main' }}
     steps:
       - name: checkout
         uses: actions/checkout@v4.1.7
@@ -44,9 +41,10 @@ jobs:
         with:
           name: package
           path: .\artifacts\packages
-      - name: Push NuGet package on main branch
-        if: ${{ env.CREATE_RELEASE == 'true' }}
-        run: dotnet nuget push .\artifacts\packages\ --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_ACTIONS }} --symbol-source https://api.nuget.org/v3/index.json --skip-duplicate
-      - name: Push NuGet package on feature branch
-        if: ${{ env.CREATE_PRERELEASE == 'true' }}
-        run: dotnet nuget push .\artifacts\packages\ --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_ACTIONS }} --symbol-source https://api.nuget.org/v3/index.json --skip-duplicate
+      - uses: NuGet/setup-nuget@v2.0.0
+        name: Push NuGet package
+        with:
+          nuget-api-key: ${{ secrets.NUGET_ACTIONS }}
+          nuget-api-key-source: https://api.nuget.org/v3/index.json
+      - run: nuget push .\artifacts\packages -SkipDuplicate -NonInteractive
+        
