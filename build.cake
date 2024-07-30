@@ -3,8 +3,8 @@
 var target = Argument("target", "Pack");
 var configuration = Argument("configuration", "Release");
 
-var assemblyVersion = "0.0.1";
-var packageVersion = "0.0.1";
+var assemblyVersion = "1.0.0";
+var packageVersion = "1.0.0";
 
 var artifactsDir = MakeAbsolute(Directory("artifacts"));
 var packagesDir = artifactsDir.Combine(Directory("packages"));
