@@ -46,7 +46,7 @@ jobs:
           path: .\artifacts\packages
       - name: Push NuGet package on main branch
         if: ${{ env.CREATE_RELEASE == 'true' }}
-        run: dotnet nuget push .\artifacts\packages\ --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_ACTIONS }}
+        run: dotnet nuget push .\artifacts\packages\ --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_ACTIONS }} --skip-duplicate
       - name: Push NuGet package on feature branch
         if: ${{ env.CREATE_PRERELEASE == 'true' }}
-        run: dotnet nuget push .\artifacts\packages\ --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_ACTIONS }}
+        run: dotnet nuget push .\artifacts\packages\ --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_ACTIONS }} --skip-duplicate
